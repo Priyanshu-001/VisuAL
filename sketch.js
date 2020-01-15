@@ -40,9 +40,7 @@ function draw() {
     
     j=getMax(o)
     o--
-    console.log("J=",j)
-    console.log("o=",o)
-    
+ 
     swap(j,o)
       
   if(o==0)
