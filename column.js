@@ -1,7 +1,8 @@
-function column(w,l,c,mode){
+function column(w,l,c,mode, Colour, Max=[]){
 this.w=w
 this.l=l
 this.c=c || [random(0, 255), random(0, 255), random(0, 255)]
+this.Colour=Colour
 
 function colorise(){
 	if(mode=="random")
