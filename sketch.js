@@ -1,80 +1,86 @@
+var total = 12;
+var data = [];
 
-var total=15;
-var data=[];
 function setup() {
+  o = total
+  SWAPS=0
+  cmps=0
+  isDone=false
+
   background(0)
-  createCanvas(400, 400);
-  w=width/total
-  for(i=0;i<total;i++)
-  { c1=random(0,255)
-    c2=random(0,255)
-    c3=random(0,255)
+  createCanvas(420, 400);
+  w = width / total
+  for (i = 0; i < total; i++) {
    
-   c=[c1,c2,c3]
-    a= new column(w,random(10,100),c)
-    // a.mouseOver()
-    
+    a = new column(w, random(10, 100))
+   
+
     data.push(a)
   }
-      }
-function swap(a,b){
-  temp=data[a]
-  data[a]=data[b]
-  data[b]=temp
+}
+
+function swap(a, b) {
+  SWAPS+=1
+  temp = data[a]
+  data[a] = data[b]
+  data[b] = temp
 
 }
- o=total
-   
+function selectionSort(limit){
+   j = getMax(limit)
+  limit--
+  
+  swap(j, limit)
+  if(limit==0){
+    isDone=true
+  }
+  return limit
+
+
+}
 
 function draw() {
-   
 
- 
+
+
   // sortIt()
   frameRate(1)
-   
-   
-    background(255);
-     plot()
-   
-    
-    j=getMax(o)
-    o--
+
+  o=selectionSort(o)
+  background(255);
+  plot()
+
+
  
-    swap(j,o)
-      
-  if(o==0)
-  {
+  if (isDone) {
     noLoop()
     console.log("done")
+    console.log("Swaps=",SWAPS)
+    console.log("Comparisons=",cmps)
   }
 
 }
-function getMax(limit){
-  m=data[limit-1].l
-  bigg=limit-1
-   for(i=0;i<limit;i++)
-  { 
-   if(m<data[i].l)
-   {
-       m=data[i].l
-       bigg=i
-   }
-  
+
+function getMax(limit) {
+  m = data[limit - 1].l
+  bigg = limit - 1
+  for (i = 0; i < limit; i++) {
+    cmps+=1
+    if (m < data[i].l) {
+      m = data[i].l
+      bigg = i
+    }
+
   }
-   return bigg
+  return bigg
 }
-function plot()
-{
-   for(i=0;i<total;i++)
-  {
+
+function plot() {
+  for (i = 0; i < total; i++) {
     fill(data[i].c)
-     obj=rect(w*i, 200,data[i].w, -data[i].l)
-   
+    obj = rect(w * i, 200, data[i].w, -data[i].l)
+
   }
-  
+
 }
-function changeColor()
-{
-  console.log("abc")
-}
+
