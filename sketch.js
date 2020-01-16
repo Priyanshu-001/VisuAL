@@ -26,18 +26,28 @@ function swap(a, b) {
   data[b] = temp
 
 }
+
 function bubbleSort(limit)
 {
   
     for(j=0;j<limit-1;j++){
+      console.log(j)
+      console.log(limit)
+      cmps+=1
       if(data[j].l>data[j+1].l)
-      {
+      { 
+
         swap(j,j+1)
       }
+    }
       limit-=1
+      if(limit==0){
+        isDone=true
+      }
       return limit
   
-}
+  }
+
 function selectionSort(limit){
    j = getMax(limit)
   limit--
@@ -59,9 +69,10 @@ function draw() {
   frameRate(1)
 
   // o=selectionSort(o)
-  o=bubbleSort(o)
-  background(255);
+  
+  background(255)
   plot()
+  o=bubbleSort(o)
 
 
  
@@ -96,4 +107,5 @@ function plot() {
   }
 
 }
+
 
