@@ -1,13 +1,27 @@
-var total = 12;
+const total = 6;
 var data = [];
+var execute=false
+curr=0
+
 
 function setup() {
   o = total
   SWAPS=0
+  execute=false
   cmps=0
   isDone=false
+  button= createButton("Start")
+  button.position(height/2,width/2)
+  button.mousePressed(Toggle)
+   dropdown = createSelect(); 
+    // Position the dropdown menu 
+    dropdown.position(button.x,button.y+button.height); 
+    // Set options 
+    dropdown.option("selectionSort"); 
+    dropdown.option("bubbleSort"); 
+    
 
-  background(0)
+ 
   createCanvas(420, 400);
   w = width / total
   for (i = 0; i < total; i++) {
@@ -36,6 +50,7 @@ function bubbleSort(limit)
       cmps+=1
       if(data[j].l>data[j+1].l)
       { 
+        
 
         swap(j,j+1)
       }
@@ -60,22 +75,52 @@ function selectionSort(limit){
 
 
 }
+function Toggle(){
+  execute=!execute
+  o=total
+ 
+ if(isDone){
+  isDone=false
+  loop()
+ }
+  
+}
 
+function sortIt(mode="selectionSort",o)
+{
+  if(mode="selectionSort")
+  {
+    o=selectionSort(o)
+
+  }
+  else if(mode="bubbleSort")
+  {
+    o=bubbleSort(o)
+  }
+  return o
+}
 function draw() {
 
-
+ 
 
   // sortIt()
-  frameRate(1)
-
+ 
   // o=selectionSort(o)
   
+ // o=bubbleSort(o)
+  
+  
+  if(execute){
+
   background(255)
   plot()
-  o=bubbleSort(o)
+  frameRate(1)
+
+  o=sortIt(dropdown.value,o)
+  console.log("Sorting Starts")
 
 
- 
+ }
   if (isDone) {
     noLoop()
     console.log("done")
